@@ -1,3 +1,3 @@
-### Automação de testes com cypress swaglabs
+# Automação de testes com cypress swaglabs
 
 ## Em Desenvolvimento

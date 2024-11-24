@@ -1,4 +1,4 @@
-describe('Testes Carrinho de compras', () => {
+describe('Testes de validação para Carrinho de compras', () => {
 
     beforeEach(() => {
         cy.visit('/');
@@ -38,11 +38,19 @@ describe('Testes Carrinho de compras', () => {
 
     });
 
-    it.only('Manutenção do carrinho após logout e login', () => {
+    it('Manutenção do carrinho após logout e login', () => {
         cy.AdicionarItemCarrinho(3);
         cy.Logout();
         cy.Login();
         cy.AdicionarItemCarrinho(5);
+    });
+
+    it('Avançar tela de carrinho sem inserir produto', () => {
+        cy.get('.shopping_cart_link').click();
+        cy.get('.checkout_button').click();
+
+        cy.contains('.error', 'Cart is empty').should('be.visible');
+        
     });
 
 });
