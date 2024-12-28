@@ -30,7 +30,7 @@ jobs:
         continue-on-error: true
 
       - name: Step 5 - Generate Allure report
-        run: npm run report:generate
+        run: npm run cy:generate
 
       - name: Step 6 - Upload Allure Report
         uses: actions/upload-artifact@v3
