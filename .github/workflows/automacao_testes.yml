@@ -1,0 +1,46 @@
+name: Cypress Tests SwagLabs
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 8 * * 1-5' # Executa de segunda a sexta-feira às 8h (UTC)
+permissions:
+  contents: write
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Step 1 - Checkout code
+        uses: actions/checkout@v4
+
+      - name: Step 2 - Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Step 3 - Install dependencies
+        run: npm install --verbose
+
+      - name: Step 4 - Run Cypress tests
+        run: npm run cy:run:allure
+        continue-on-error: true
+
+      - name: Step 5 - Generate Allure report
+        run: npm run report:generate
+
+      - name: Step 6 - Upload Allure Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: report allure
+          path: allure-report
+
+      - name: Step 7 - publish report
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: report_page_BE_cypress
+          publish_dir: allure-report

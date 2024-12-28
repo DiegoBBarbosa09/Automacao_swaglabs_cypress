@@ -8,20 +8,25 @@
     "lint:fix": "eslint --fix",
     "cy:open": "cypress open",
     "cy:run": "npx eslint --fix && cypress run",
-    "cy:run:ci": "npx cypress run --env allure=true --reporter mocha-allure-reporter"
+    "cy:run:allure": "npx cypress run --env allure=true --reporter mocha-allure-reporter",
+    "cy:generate": "npx allure generate allure-results --clean -o allure-report",
+    "allure:clear": "rm -r allure-results/ allure-report || true",
+    "cy:ci": "npx npm-run-all allure:clear cy:run:allure"
   },
   "author": "Diego Barbosa",
   "license": "MIT",
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.15.0",
+    "@faker-js/faker": "^9.3.0",
     "@shelex/cypress-allure-plugin": "^2.40.2",
     "allure-commandline": "^2.32.0",
     "allure-cypress": "^3.0.6",
-    "cypress": "^13.15.2",
+    "cypress": "^13.16.1",
     "eslint": "^9.15.0",
     "eslint-js": "github:eslint/js",
     "eslint-plugin-cypress": "^4.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "mocha-allure-reporter": "^1.4.0"
   }
 }
