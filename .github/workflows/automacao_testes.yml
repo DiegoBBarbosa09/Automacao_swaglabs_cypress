@@ -42,5 +42,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: report_page_BE_cypress
+          publish_branch: report_page_swaglabs_cypress
           publish_dir: allure-report
